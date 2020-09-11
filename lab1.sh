@@ -236,6 +236,8 @@ do
 		;;		
 	o) echo "Отключение сетевого интерфейса по шаблону IP: ${OPTARG}"
 		# Что имеется ввиду под шаблоном IP?
+		# 192.168.x.7
+		# 192.168.0.0/16
 		n=$(ip addr | grep ${OPTARG} | wc -w)
 		name=$(ip addr | grep ${OPTARG} | gawk '{print $'${n}'}')
 		ifconfig ${name} down
