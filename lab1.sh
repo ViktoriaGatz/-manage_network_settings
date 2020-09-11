@@ -235,7 +235,7 @@ do
 		kill -9 ${OPTARG}
 		;;		
 	o) echo "Отключение сетевого интерфейса по шаблону IP: ${OPTARG}"
-		# Што имеется ввиду под шаблоном IP?
+		# Что имеется ввиду под шаблоном IP?
 		n=$(ip addr | grep ${OPTARG} | wc -w)
 		name=$(ip addr | grep ${OPTARG} | gawk '{print $'${n}'}')
 		ifconfig ${name} down
