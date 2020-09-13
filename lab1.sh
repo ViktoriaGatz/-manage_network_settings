@@ -47,7 +47,7 @@ do
 			echo "    Примеры использования:"
 			echo "    -s | --stat"
 			echo -e "Опции можно группировать в любом порядке, пример:\n"
-			echo "    --up lo enp2s0 -d wlp3s0 --help - запустит интерфейсы lo и enp2s0, отключит интерфейс wlp3s0 и отобразит подсказки"
+			echo "    --up lo enp2s0 -d wlp3s0 - запустит интерфейсы lo и enp2s0, отключит интерфейс wlp3s0"
 			echo
 			;;
 		all) "Вывод всех сетевых интерфейсов"
@@ -135,7 +135,8 @@ do
 				OPTIND=$OPTIND-1
 				break
 			fi
-			kill -9 ${1}
+			name = $(lsof -i -P -n | grep :${1} | gawk '{print $2}')
+			kill -9 ${name}
 			;;
 		otcl) shift
 			echo "Отключение сетевого интерфейса по шаблону IP: ${1}"
@@ -233,7 +234,8 @@ do
 		route add default gw ${OPTARG}
 		;;
 	k) echo "Убийство процесса который занимает порт ${OPTARG}"
-		kill -9 ${OPTARG}
+		name = $(lsof -i -P -n | grep :${OPTARG} | gawk '{print $2}')
+		kill -9 ${name}
 		;;		
 	o) echo "Отключение сетевого интерфейса по шаблону IP: ${OPTARG}"
 		# Что имеется ввиду под шаблоном IP?
