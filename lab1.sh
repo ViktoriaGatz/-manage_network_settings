@@ -136,7 +136,7 @@ do
 				OPTIND=$OPTIND-1
 				break
 			fi
-			name = $(lsof -i -P -n | grep :${1} | gawk '{print $2}')
+			name=$(lsof -i -P -n | grep :${1} | gawk '{print $2}')
 			kill -9 ${name}
 			;;
 		stat) echo "Сетевая статистика (статистика использования трафика)"
@@ -233,7 +233,7 @@ do
 		route add default gw ${OPTARG}
 		;;
 	k) echo "Убийство процесса который занимает порт ${OPTARG}"
-		name = $(lsof -i -P -n | grep :${OPTARG} | gawk '{print $2}')
+		name=$(lsof -i -P -n | grep :${OPTARG} | gawk '{print $2}')
 		kill -9 ${name}
 		;;		
 	s) echo "Сетевая статистика (статистика использования трафика)"
